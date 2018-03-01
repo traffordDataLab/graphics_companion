@@ -1,0 +1,29 @@
+@font-face {
+    font-family: 'Roboto', sans-serif;
+}
+
+div {
+    font-family: 'Roboto', sans-serif;
+}
+
+h1, h2, h3, h4, h5, h6, .header
+{
+    font-family: 'Roboto', sans-serif;
+    color:#757575;
+}
+
+a
+{
+    color: #fc6721;
+    text-decoration: none;
+}
+
+a:hover
+{
+    text-decoration: underline;
+}
+
+.list-group-item.active, .list-group-item.active:focus, .list-group-item.active:hover
+{
+    background-color: #fc6721;
+}
