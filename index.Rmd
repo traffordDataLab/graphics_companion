@@ -497,7 +497,7 @@ ggplot(df, aes(reorder(continent, -median, sum), median)) +
        y = "GDP per capita",
        fill = NULL) +
   theme_lab() +
-  theme(panel.grid.major.x = element_blank())
+  theme(panel.grid.major.y = element_blank())
 ```
 
 ### Lollipop chart
@@ -568,10 +568,10 @@ ggplot(sf, aes(fill = lifeExp)) +
 
 ## Useful resources
 
-- Chang, W. (2012). R Graphics Cookbook: Practical Recipes for Visualizing Data. O'Reilly Media, Inc.
+- Chang, W. (2012). *R Graphics Cookbook: Practical Recipes for Visualizing Data*. O'Reilly Media, Inc.
 
-- Wickham, H., & Grolemund, G. (2016). R for data science: import, tidy, transform, visualize, and model data. O'Reilly Media, Inc. Available online via [http://r4ds.had.co.nz/](http://r4ds.had.co.nz/)
+- Wickham, H., & Grolemund, G. (2016). *R for data science: import, tidy, transform, visualize, and model data*. O'Reilly Media, Inc. Available online via [http://r4ds.had.co.nz/](http://r4ds.had.co.nz/)
 
-- Wickham, H. (2016). ggplot2: elegant graphics for data analysis. Springer.
+- Wickham, H. (2016). *ggplot2: elegant graphics for data analysis*. Springer.
 
 - [RStudio ggplot2 cheat sheet](https://github.com/rstudio/cheatsheets/raw/master/data-visualization-2.1.pdf)
