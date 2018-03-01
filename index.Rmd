@@ -545,7 +545,6 @@ ggplot(sf, aes(fill = lifeExp)) +
   geom_sf(alpha = 0.8, colour = "white", size = 0.1) +
   scale_fill_gradientn(colours = brewer.pal(5, "Oranges"),
                        name = "Age (Years)",
-                       na.value = "#bdbdbd",
                        guide = guide_colourbar(
                          direction = "horizontal",
                          barheight = unit(2, units = "mm"),
@@ -557,14 +556,13 @@ ggplot(sf, aes(fill = lifeExp)) +
        subtitle = "Life expectancy, 2007",
        caption = "Source: Gapminder.org  |  @traffordDataLab",
        x = NULL, 
-       y = NULL, 
-       fill = NULL) +
+       y = NULL) +
   theme_lab() +
   theme(plot.title = element_text(hjust = 0.5),
         plot.subtitle = element_text(hjust = 0.5),
         legend.position = "bottom") +
   coord_sf(crs = "+proj=laea +lat_0=52 +lon_0=10 +x_0=4321000 +y_0=3210000
-        +datum=WGS84 +units=m +no_defs",
+           +datum=WGS84 +units=m +no_defs",
            datum = NA)
 ```
 
