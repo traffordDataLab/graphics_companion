@@ -27,15 +27,15 @@ knitr::opts_chunk$set(echo = TRUE, cache = TRUE, prompt = FALSE, tidy = TRUE, co
 
 <br />
 
-The Graphics Companion provides the code for different data visualisations that can be created using the [ggplot2](https://cran.r-project.org/web/packages/ggplot2/index.html) [R](https://cran.r-project.org/) package.
+The Graphics Companion provides the [R](https://cran.r-project.org/) code for different data visualisations that can be created using the [ggplot2](https://cran.r-project.org/web/packages/ggplot2/index.html) package.
 
-The Graphics Companion adopts the structure of the [Financial Times' Visual Vocabulary](https://ft.com/vocabulary) by categorising different chart types by the data relationships that they best illustrate.
+The Companion adopts the structure of the [Financial Times' Visual Vocabulary](https://ft.com/vocabulary) by categorising different chart types by the data relationships that they best illustrate.
 
-The data used throughout the Graphics Companion derive from Hans Rosling's [Gapminder World](https://www.gapminder.org/) which available in the R [gapminder](https://cran.r-project.org/web/packages/gapminder/index.html) package. Data on life expectancy at birth, GDP per capita and total population are provided for 142 countries between 1952 and 2007.
+The data used throughout the Companion derive from a subset of Hans Rosling's [Gapminder World](https://www.gapminder.org/) which are available in the [gapminder](https://cran.r-project.org/web/packages/gapminder/index.html) R package. Data on life expectancy at birth, GDP per capita and total population are provided for 142 countries between 1952 and 2007.
 
 ## Setup
 
-You need to install (once only) the [tidyverse](https://www.tidyverse.org/) package and load it into your R session. [ggplot2](https://cran.r-project.org/web/packages/ggplot2/index.html) is part of the tidyverse suite of R tools for data science.
+You need to install - but only once - the [tidyverse](https://www.tidyverse.org/) package and load it into your R session. [ggplot2](https://cran.r-project.org/web/packages/ggplot2/index.html) is part of the tidyverse suite of R tools for data science.
 ```{r}
 # install.packages("tidyverse")
 library(tidyverse)
@@ -271,7 +271,7 @@ ggplot(filter(gapminder, year == 2007), aes(x = continent, y = lifeExp, fill = c
        subtitle = "Life expectancy distributions, 2007",
        caption = "Source: Gapminder.org  |  @traffordDataLab",
        x = "",
-       y = "Age (years") +
+       y = "Age (years)") +
   theme_lab() +
   theme(panel.grid.major.x = element_blank(),
         legend.position = "none")
