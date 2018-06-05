@@ -19,7 +19,7 @@ output:
 
 ## [ggplot2](https://cran.r-project.org/web/packages/ggplot2/index.html) graphics companion
 
-Last updated: 1 March 2018
+Last updated: 5 June 2018
  
 ```{r setup, include = FALSE}
 knitr::opts_chunk$set(echo = TRUE, cache = TRUE, prompt = FALSE, tidy = TRUE, comment = NA, message = FALSE, warning = FALSE)
@@ -61,7 +61,7 @@ If you wish to use an alternative theme simply swap out the `theme_lab()` functi
 ## Change over time
 
 ### Single line chart
-```{r}
+```{r, tidy = FALSE}
 df <- filter(gapminder, country == "Argentina") %>% 
   mutate(year = as.Date(paste(year, "-01-01", sep = "", format='%Y-%b-%d')))
 
@@ -80,7 +80,7 @@ ggplot(df, aes(x = year, y = lifeExp)) +
 ```
 
 ### Multiple line chart
-```{r}
+```{r, tidy = FALSE}
 df <- filter(gapminder, country %in% c("Argentina", "Italy")) %>% 
   mutate(year = as.Date(paste(year, "-01-01", sep = "", format='%Y-%b-%d')))
 
@@ -101,8 +101,8 @@ ggplot(df, aes(x = year, y = lifeExp, colour = country)) +
         legend.position = "bottom")
 ```
 
-### Bar chart
-```{r}
+### Bar chart (vertical)
+```{r, tidy = FALSE}
 df <- filter(gapminder, country == "Egypt") %>% 
   mutate(year = as.Date(paste(year, "-01-01", sep = "", format='%Y-%b-%d')))
 
@@ -120,7 +120,7 @@ ggplot(df, aes(x = year, y = gdpPercap)) +
 ```
 
 ### Slope chart
-```{r}
+```{r, tidy = FALSE}
 df <- filter(gapminder, country %in% c("Iceland", "Norway") & year %in% c(1952, 2007))
 
 ggplot(df) + 
@@ -147,7 +147,7 @@ ggplot(df) +
 ```
 
 ### Stacked area chart
-```{r}
+```{r, tidy = FALSE}
 df <- gapminder %>% 
   filter(country %in% c("France", "Germany", "Ireland", "Italy")) %>% 
   mutate(year = as.Date(paste(year, "-01-01", sep = "", format='%Y-%b-%d')))
@@ -171,7 +171,7 @@ ggplot(df, aes(x = year, y = gdpPercap, fill = country)) +
 ## Correlation
 
 ### Scatterplot
-```{r}
+```{r, tidy = FALSE}
 ggplot(filter(gapminder, year == 2007), aes(x = gdpPercap, y = lifeExp)) +
   geom_point(colour = "#fc6721") +
   scale_x_log10(labels = scales::dollar) +
@@ -185,7 +185,7 @@ ggplot(filter(gapminder, year == 2007), aes(x = gdpPercap, y = lifeExp)) +
 ```
 
 ### Bubble chart
-```{r}
+```{r, tidy = FALSE}
 ggplot(filter(gapminder, year == 2007), aes(x = gdpPercap, y = lifeExp)) +
   scale_x_log10(labels = scales::dollar) +
   geom_point(aes(size = pop, fill = continent), shape = 21, colour = "white", alpha = 0.6) +
@@ -206,7 +206,7 @@ ggplot(filter(gapminder, year == 2007), aes(x = gdpPercap, y = lifeExp)) +
 ## Deviation
 
 ### Diverging bar chart
-```{r}
+```{r, tidy = FALSE}
 df <- gapminder %>%
   filter(year == 2007 & continent == "Europe") %>%
   mutate(median = median(gdpPercap),
@@ -234,7 +234,7 @@ ggplot(df, aes(x = country, y = diff, label = country)) +
 ## Distribution
 
 ### Histogram
-```{r}
+```{r, tidy = FALSE}
 ggplot(filter(gapminder, year == 2007), aes(x = lifeExp)) +
   geom_histogram(binwidth = 1, fill = "#fc6721", colour = "white", alpha = 0.8) +
   scale_y_continuous(breaks = scales::pretty_breaks()) +
@@ -248,7 +248,7 @@ ggplot(filter(gapminder, year == 2007), aes(x = lifeExp)) +
 ```
 
 ### Density plot
-```{r}
+```{r, tidy = FALSE}
 ggplot(filter(gapminder, year == 2007), aes(x = lifeExp)) + 
   geom_density(aes(fill = continent), size = 0.1, alpha = 0.5) +
   scale_fill_brewer(palette = "Set2") +
@@ -263,7 +263,7 @@ ggplot(filter(gapminder, year == 2007), aes(x = lifeExp)) +
 ```
 
 ### Boxplot
-```{r}
+```{r, tidy = FALSE}
 ggplot(filter(gapminder, year == 2007), aes(x = continent, y = lifeExp, fill = continent)) + 
   geom_boxplot(colour = "#757575", alpha = 0.8) +
   scale_fill_brewer(palette = "Set2") +
@@ -278,7 +278,7 @@ ggplot(filter(gapminder, year == 2007), aes(x = continent, y = lifeExp, fill = c
 ```
 
 ### Violin plot
-```{r}
+```{r, tidy = FALSE}
 ggplot(filter(gapminder, year == 2007), aes(x = continent, y = lifeExp, fill = continent)) +
   geom_violin(colour = "#757575", alpha = 0.8) +
   scale_fill_brewer(palette = "Set2") +
@@ -293,7 +293,7 @@ ggplot(filter(gapminder, year == 2007), aes(x = continent, y = lifeExp, fill = c
 ```
 
 ### Ridgeline plot
-```{r}
+```{r, tidy = FALSE}
 library(ggridges)
 df <- gapminder %>% filter(year == 2007 & continent != "Oceania")
 
@@ -316,28 +316,8 @@ ggplot(df, aes(x = lifeExp, y = fct_rev(continent), fill = continent)) +
 
 ## Magnitude
 
-### Bar chart
-```{r}
-df <- gapminder %>%
-  filter(year == 2007) %>%
-  group_by(continent) %>%
-  summarise(median = median(gdpPercap))
-
-ggplot(df, aes(x = continent, y = median)) +
-  geom_col(fill = "#fc6721", alpha = 0.8) +
-  scale_y_continuous(expand = c(0, 0), labels = scales::dollar) +
-  labs(title = "",
-       subtitle = "Median GDP per capita by continent, 2007",
-       caption = "Source: Gapminder.org  |  @traffordDataLab",
-       x = NULL,
-       y = "GDP per capita",
-       fill = NULL) +
-  theme_lab() +
-  theme(panel.grid.major.x = element_blank())
-```
-
-### Bar chart (filled)
-```{r}
+### Bar chart (vertical)
+```{r, tidy = FALSE}
 df <- gapminder %>%
       filter(year == 2007) %>%
       group_by(continent) %>%
@@ -358,8 +338,8 @@ ggplot(df, aes(x = continent, y = median, fill = continent)) +
         legend.position = "none")
 ```
 
-### Dodged bar chart
-```{r}
+### Grouped bar chart
+```{r, tidy = FALSE}
 df <- gapminder %>% 
   filter(year > 1990) %>%
   group_by(year, continent) %>%
@@ -382,7 +362,7 @@ ggplot(df, aes(x = year, y = totalpop, group = continent, fill = continent)) +
 ```
 
 ### Stacked bar chart
-```{r}
+```{r, tidy = FALSE}
 df <- gapminder %>% 
   filter(year > 1990) %>%
   group_by(year, continent) %>%
@@ -407,8 +387,8 @@ ggplot(df, aes(x = year, y = totalpop, fill = continent)) +
 
 ## Part-to-whole
 
-### Stacked bar chart (filled)
-```{r}
+### 100% stacked bar chart
+```{r, tidy = FALSE}
 df <- gapminder %>% 
   filter(year > 1990) %>%
   group_by(year, continent) %>%
@@ -431,8 +411,8 @@ ggplot(df, aes(x = year, y = totalpop, fill = continent)) +
         legend.position = "right")
 ```
 
-### Tree map
-```{r}
+### Treemap
+```{r, tidy = FALSE}
 library(treemapify)
 df <- gapminder %>% 
   filter(year == 2007) %>%
@@ -455,7 +435,7 @@ ggplot(df, aes(area = gdp, fill = continent, subgroup = continent, label = count
 ```
 
 ### Waffle chart
-```{r}
+```{r, tidy = FALSE}
 library(waffle) ; library(RColorBrewer)
 
 g7 <- c("Canada", "France", "Germany", "Italy", "Japan", "United Kingdom", "United States") 
@@ -479,8 +459,8 @@ waffle(round((vec/sum(df$gdp)) * 100, 0), rows = 5, size = 1,
 
 ## Ranking
 
-### Ordered bar chart
-```{r}
+### Ordered bar chart (horizontal)
+```{r, tidy = FALSE}
 df <- gapminder %>%
   filter(year == 2007) %>%
   group_by(continent) %>%
@@ -501,7 +481,7 @@ ggplot(df, aes(reorder(continent, -median, sum), median)) +
 ```
 
 ### Lollipop chart
-```{r}
+```{r, tidy = FALSE}
 df <- gapminder %>% 
   filter(year == 2007 & continent == "Europe") %>% 
   arrange(gdpPercap) %>% 
@@ -526,7 +506,7 @@ ggplot(df, aes(x = gdpPercap, y = country)) +
 ## Spatial
 
 ### Choropleth map
-```{r}
+```{r, tidy = FALSE}
 df <- gapminder %>%
   filter(year == 2007) %>%
   left_join(country_codes) %>% 
