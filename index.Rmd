@@ -24,15 +24,15 @@ knitr::opts_chunk$set(echo = TRUE, cache = TRUE, prompt = FALSE, tidy = TRUE, co
 
 <br />
 
-The Graphics Companion provides the [R](https://cran.r-project.org/) code for different data visualisations that can be created using the [ggplot2](https://cran.r-project.org/web/packages/ggplot2/index.html) package.
+The Graphics Companion provides the [R code](https://cran.r-project.org/) for different data visualisations that can be created using the [ggplot2 package](https://cran.r-project.org/web/packages/ggplot2/index.html).
 
 The Companion adopts the structure of the [Financial Times' Visual Vocabulary](https://ft.com/vocabulary) by categorising different chart types by the data relationships that they best illustrate.
 
-The data used throughout the Companion derive from a subset of Hans Rosling's [Gapminder World](https://www.gapminder.org/) which are available in the [gapminder](https://cran.r-project.org/web/packages/gapminder/index.html) R package. Data on life expectancy at birth, GDP per capita and total population are provided for 142 countries between 1952 and 2007.
+The data used throughout the Companion derive from a subset of [Hans Rosling's Gapminder World](https://www.gapminder.org/) which are available in the [gapminder R package](https://cran.r-project.org/web/packages/gapminder/index.html). Data on life expectancy at birth, GDP per capita and total population are provided for 142 countries between 1952 and 2007.
 
 ## Setup
 
-You need to install - but only once - the [tidyverse](https://www.tidyverse.org/) package and load it into your R session. ggplot2 is part of the tidyverse suite of R tools for data science.
+You need to install - but only once - the [tidyverse package](https://www.tidyverse.org/) and load it into your R session. ggplot2 is part of the tidyverse suite of R tools for data science.
 ```{r}
 # install.packages("tidyverse")
 library(tidyverse)
@@ -51,7 +51,7 @@ Lastly, we need to load the [Trafford Data Lab's ggplot2 theme](https://raw.gith
 source("https://raw.githubusercontent.com/traffordDataLab/assets/601e80334e0d78dfe913685561196b8b6fc278a7/theme/ggplot2/theme_lab.R")
 ```
 
-If you wish to use an alternative theme simply swap out the `theme_lab()` function with a different [ggplot2 theme](http://ggplot2.tidyverse.org/reference/ggtheme.html) or use one from the [ggthemes](https://cran.r-project.org/web/packages/ggthemes/index.html) package.
+If you wish to use an alternative theme simply swap out the `theme_lab()` function with a different [ggplot2 theme](http://ggplot2.tidyverse.org/reference/ggtheme.html) or use one from the [ggthemes package](https://cran.r-project.org/web/packages/ggthemes/index.html).
 
 <br />
 
