@@ -1,20 +1,40 @@
-@font-face {
-    font-family: 'Roboto', sans-serif;
+@import url('https://fonts.googleapis.com/css?family=Open+Sans%7CRoboto');
+
+html, body
+{
+    font-family: 'Open Sans', sans-serif;
 }
 
-div {
-    font-family: 'Roboto', sans-serif;
+main, header, footer
+{
+    display: block;
+    box-sizing: border-box;
 }
 
-h1, h2, h3, h4, h5, h6, .header
+h1, h2, h3
 {
     font-family: 'Roboto', sans-serif;
-    color:#757575;
+    color: #707070;
+}
+
+h1
+{
+    margin-bottom: 0;
+}
+
+caption
+{
+    color: #707070;
+    xfont-weight: bold;
+}
+
+a, a:hover, a:focus, a:visited
+{
+    color: #046dc3;
 }
 
 a
 {
-    color: #fc6721;
     text-decoration: none;
 }
 
@@ -25,5 +45,16 @@ a:hover
 
 .list-group-item.active, .list-group-item.active:focus, .list-group-item.active:hover
 {
-    background-color: #fc6721;
+    background-color: #5d77a3;
+}
+
+.traffordDataLabLogo
+{
+    margin-top: 23px;
+}
+
+/* code highlighting override - "textmate" comments don't have enough contrast */
+.hljs-comment
+{
+    color: #8E5913;     /* comment colour from "tango" */
 }

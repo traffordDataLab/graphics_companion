@@ -1,4 +1,6 @@
 ---
+pagetitle: "ggplot2 graphics companion"
+lang: "en-GB"
 output:
   html_document:
     css: styles.css
@@ -7,19 +9,14 @@ output:
     code_folding: hide
     toc: TRUE
     toc_float: TRUE
+    includes:
+      before_body: before_body.html
+      after_body: after_body.html
 ---
+<a href="https://www.trafforddatalab.io/learning.html" aria-label="Visit the Trafford Data Lab learning page"><img src="https://www.trafforddatalab.io/assets/logo/trafforddatalab_logo.svg" alt="Trafford Data Lab" width="93" class="traffordDataLabLogo"/></a><br />
 
-<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Open+Sans|Roboto" />
-
-<a href="http://www.trafforddatalab.io" target="_blank"><img src="images/logo.png" style="height:50px;position:absolute;top:15px;left:25px;" border="0"/></a>
-
-<br />
-<br />
-<br />
-
-## [ggplot2](https://cran.r-project.org/web/packages/ggplot2/index.html) graphics companion
-
-Last updated: 5 June 2018
+# ggplot2 graphics companion {.toc-ignore}
+Last updated: `r format(Sys.time(), '%d %B %Y')`
  
 ```{r setup, include = FALSE}
 knitr::opts_chunk$set(echo = TRUE, cache = TRUE, prompt = FALSE, tidy = TRUE, comment = NA, message = FALSE, warning = FALSE)
@@ -35,7 +32,7 @@ The data used throughout the Companion derive from a subset of Hans Rosling's [G
 
 ## Setup
 
-You need to install - but only once - the [tidyverse](https://www.tidyverse.org/) package and load it into your R session. [ggplot2](https://cran.r-project.org/web/packages/ggplot2/index.html) is part of the tidyverse suite of R tools for data science.
+You need to install - but only once - the [tidyverse](https://www.tidyverse.org/) package and load it into your R session. ggplot2 is part of the tidyverse suite of R tools for data science.
 ```{r}
 # install.packages("tidyverse")
 library(tidyverse)
@@ -48,10 +45,10 @@ All of the example plots below use data contained in the gapminder R package whi
 library(gapminder)
 ```
 
-Lastly, we need to load the Trafford Data Lab's [ggplot2](https://cran.r-project.org/web/packages/ggplot2/index.html) theme.
+Lastly, we need to load the [Trafford Data Lab's ggplot2 theme](https://raw.githubusercontent.com/traffordDataLab/assets/601e80334e0d78dfe913685561196b8b6fc278a7/theme/ggplot2/theme_lab.R).
 
 ```{r}
-source("https://github.com/traffordDataLab/assets/raw/master/theme/ggplot2/theme_lab.R")
+source("https://raw.githubusercontent.com/traffordDataLab/assets/601e80334e0d78dfe913685561196b8b6fc278a7/theme/ggplot2/theme_lab.R")
 ```
 
 If you wish to use an alternative theme simply swap out the `theme_lab()` function with a different [ggplot2 theme](http://ggplot2.tidyverse.org/reference/ggtheme.html) or use one from the [ggthemes](https://cran.r-project.org/web/packages/ggthemes/index.html) package.
@@ -61,7 +58,7 @@ If you wish to use an alternative theme simply swap out the `theme_lab()` functi
 ## Change over time
 
 ### Single line chart
-```{r, tidy = FALSE}
+```{r, tidy = FALSE, fig.cap = "Life expectancy in Argentina, 1952-2007 single line chart."}
 df <- filter(gapminder, country == "Argentina") %>% 
   mutate(year = as.Date(paste(year, "-01-01", sep = "", format='%Y-%b-%d')))
 
@@ -80,7 +77,7 @@ ggplot(df, aes(x = year, y = lifeExp)) +
 ```
 
 ### Multiple line chart
-```{r, tidy = FALSE}
+```{r, tidy = FALSE, fig.cap = "Life expectancy in Argentina and Italy, 1952-2007 multple line chart."}
 df <- filter(gapminder, country %in% c("Argentina", "Italy")) %>% 
   mutate(year = as.Date(paste(year, "-01-01", sep = "", format='%Y-%b-%d')))
 
@@ -102,7 +99,7 @@ ggplot(df, aes(x = year, y = lifeExp, colour = country)) +
 ```
 
 ### Bar chart (vertical)
-```{r, tidy = FALSE}
+```{r, tidy = FALSE, fig.cap = "GDP per capita in Egypt, 1952-2007 vertical bar chart."}
 df <- filter(gapminder, country == "Egypt") %>% 
   mutate(year = as.Date(paste(year, "-01-01", sep = "", format='%Y-%b-%d')))
 
@@ -120,7 +117,7 @@ ggplot(df, aes(x = year, y = gdpPercap)) +
 ```
 
 ### Slope chart
-```{r, tidy = FALSE}
+```{r, tidy = FALSE, fig.cap = "GDP per capita change, 1952-2007 slope chart."}
 df <- filter(gapminder, country %in% c("Iceland", "Norway") & year %in% c(1952, 2007))
 
 ggplot(df) + 
@@ -147,7 +144,7 @@ ggplot(df) +
 ```
 
 ### Stacked area chart
-```{r, tidy = FALSE}
+```{r, tidy = FALSE, fig.cap = "GDP per capita by country, 1952-2007 stacked area chart."}
 df <- gapminder %>% 
   filter(country %in% c("France", "Germany", "Ireland", "Italy")) %>% 
   mutate(year = as.Date(paste(year, "-01-01", sep = "", format='%Y-%b-%d')))
@@ -171,7 +168,7 @@ ggplot(df, aes(x = year, y = gdpPercap, fill = country)) +
 ## Correlation
 
 ### Scatterplot
-```{r, tidy = FALSE}
+```{r, tidy = FALSE, fig.cap = "Relationship between life expectancy and income, 2007 scatterplot."}
 ggplot(filter(gapminder, year == 2007), aes(x = gdpPercap, y = lifeExp)) +
   geom_point(colour = "#fc6721") +
   scale_x_log10(labels = scales::dollar) +
@@ -185,7 +182,7 @@ ggplot(filter(gapminder, year == 2007), aes(x = gdpPercap, y = lifeExp)) +
 ```
 
 ### Bubble chart
-```{r, tidy = FALSE}
+```{r, tidy = FALSE, fig.cap = "Relationship between life expectancy and income, 2007 bubble chart."}
 ggplot(filter(gapminder, year == 2007), aes(x = gdpPercap, y = lifeExp)) +
   scale_x_log10(labels = scales::dollar) +
   geom_point(aes(size = pop, fill = continent), shape = 21, colour = "white", alpha = 0.6) +
@@ -206,7 +203,7 @@ ggplot(filter(gapminder, year == 2007), aes(x = gdpPercap, y = lifeExp)) +
 ## Deviation
 
 ### Diverging bar chart
-```{r, tidy = FALSE}
+```{r, tidy = FALSE, fig.cap = "GDP per capita, 2007 diverging bar chart."}
 df <- gapminder %>%
   filter(year == 2007 & continent == "Europe") %>%
   mutate(median = median(gdpPercap),
@@ -234,7 +231,7 @@ ggplot(df, aes(x = country, y = diff, label = country)) +
 ## Distribution
 
 ### Histogram
-```{r, tidy = FALSE}
+```{r, tidy = FALSE, fig.cap = "Life expectancy distribution, 2007 histogram."}
 ggplot(filter(gapminder, year == 2007), aes(x = lifeExp)) +
   geom_histogram(binwidth = 1, fill = "#fc6721", colour = "white", alpha = 0.8) +
   scale_y_continuous(breaks = scales::pretty_breaks()) +
@@ -248,7 +245,7 @@ ggplot(filter(gapminder, year == 2007), aes(x = lifeExp)) +
 ```
 
 ### Density plot
-```{r, tidy = FALSE}
+```{r, tidy = FALSE, fig.cap = "Life expectancy distribution, 2007 density plot."}
 ggplot(filter(gapminder, year == 2007), aes(x = lifeExp)) + 
   geom_density(aes(fill = continent), size = 0.1, alpha = 0.5) +
   scale_fill_brewer(palette = "Set2") +
@@ -263,7 +260,7 @@ ggplot(filter(gapminder, year == 2007), aes(x = lifeExp)) +
 ```
 
 ### Boxplot
-```{r, tidy = FALSE}
+```{r, tidy = FALSE, fig.cap = "Life expectancy distribution, 2007 boxplot."}
 ggplot(filter(gapminder, year == 2007), aes(x = continent, y = lifeExp, fill = continent)) + 
   geom_boxplot(colour = "#757575", alpha = 0.8) +
   scale_fill_brewer(palette = "Set2") +
@@ -278,7 +275,7 @@ ggplot(filter(gapminder, year == 2007), aes(x = continent, y = lifeExp, fill = c
 ```
 
 ### Violin plot
-```{r, tidy = FALSE}
+```{r, tidy = FALSE, fig.cap = "Life expectancy distribution, 2007 violin plot."}
 ggplot(filter(gapminder, year == 2007), aes(x = continent, y = lifeExp, fill = continent)) +
   geom_violin(colour = "#757575", alpha = 0.8) +
   scale_fill_brewer(palette = "Set2") +
@@ -293,7 +290,7 @@ ggplot(filter(gapminder, year == 2007), aes(x = continent, y = lifeExp, fill = c
 ```
 
 ### Ridgeline plot
-```{r, tidy = FALSE}
+```{r, tidy = FALSE, fig.cap = "Life expectancy distribution, 2007 ridgeline plot."}
 library(ggridges)
 df <- gapminder %>% filter(year == 2007 & continent != "Oceania")
 
@@ -312,12 +309,10 @@ ggplot(df, aes(x = lifeExp, y = fct_rev(continent), fill = continent)) +
         legend.position = "none")
 ```
 
-## Flow
-
 ## Magnitude
 
 ### Bar chart (vertical)
-```{r, tidy = FALSE}
+```{r, tidy = FALSE, fig.cap = "Median GDP per capita by continent, 2007 vertical bar chart."}
 df <- gapminder %>%
       filter(year == 2007) %>%
       group_by(continent) %>%
@@ -339,7 +334,7 @@ ggplot(df, aes(x = continent, y = median, fill = continent)) +
 ```
 
 ### Grouped bar chart
-```{r, tidy = FALSE}
+```{r, tidy = FALSE, fig.cap = "Total population by continent, 1990-2007 grouped bar chart."}
 df <- gapminder %>% 
   filter(year > 1990) %>%
   group_by(year, continent) %>%
@@ -362,7 +357,7 @@ ggplot(df, aes(x = year, y = totalpop, group = continent, fill = continent)) +
 ```
 
 ### Stacked bar chart
-```{r, tidy = FALSE}
+```{r, tidy = FALSE, fig.cap = "Total population by continent, 1990-2007 stacked bar chart."}
 df <- gapminder %>% 
   filter(year > 1990) %>%
   group_by(year, continent) %>%
@@ -388,7 +383,7 @@ ggplot(df, aes(x = year, y = totalpop, fill = continent)) +
 ## Part-to-whole
 
 ### 100% stacked bar chart
-```{r, tidy = FALSE}
+```{r, tidy = FALSE, fig.cap = "Proportion of total population by continent, 1990-2007 100% stacked bar chart."}
 df <- gapminder %>% 
   filter(year > 1990) %>%
   group_by(year, continent) %>%
@@ -412,7 +407,7 @@ ggplot(df, aes(x = year, y = totalpop, fill = continent)) +
 ```
 
 ### Treemap
-```{r, tidy = FALSE}
+```{r, tidy = FALSE, fig.cap = "Country GDP by continent, 2007 treemap."}
 library(treemapify)
 df <- gapminder %>% 
   filter(year == 2007) %>%
@@ -435,7 +430,7 @@ ggplot(df, aes(area = gdp, fill = continent, subgroup = continent, label = count
 ```
 
 ### Waffle chart
-```{r, tidy = FALSE}
+```{r, tidy = FALSE, fig.cap = "GDP in G7 countries, 2007 waffle chart."}
 library(waffle) ; library(RColorBrewer)
 
 g7 <- c("Canada", "France", "Germany", "Italy", "Japan", "United Kingdom", "United States") 
@@ -460,7 +455,7 @@ waffle(round((vec/sum(df$gdp)) * 100, 0), rows = 5, size = 1,
 ## Ranking
 
 ### Ordered bar chart (horizontal)
-```{r, tidy = FALSE}
+```{r, tidy = FALSE, fig.cap = "Median GDP per capita by continent, 2007 order bar chart."}
 df <- gapminder %>%
   filter(year == 2007) %>%
   group_by(continent) %>%
@@ -481,7 +476,7 @@ ggplot(df, aes(reorder(continent, -median, sum), median)) +
 ```
 
 ### Lollipop chart
-```{r, tidy = FALSE}
+```{r, tidy = FALSE, fig.cap = "GDP per capita in European countries, 2007 lollipop chart."}
 df <- gapminder %>% 
   filter(year == 2007 & continent == "Europe") %>% 
   arrange(gdpPercap) %>% 
@@ -506,7 +501,7 @@ ggplot(df, aes(x = gdpPercap, y = country)) +
 ## Spatial
 
 ### Choropleth map
-```{r, tidy = FALSE}
+```{r, tidy = FALSE, fig.cap = "Life expectancy, 2007 choropleth map."}
 df <- gapminder %>%
   filter(year == 2007) %>%
   left_join(country_codes) %>% 
@@ -554,4 +549,17 @@ ggplot(sf, aes(fill = lifeExp)) +
 
 - Wickham, H. (2016). *ggplot2: elegant graphics for data analysis*. Springer.
 
-- [RStudio ggplot2 cheat sheet](https://github.com/rstudio/cheatsheets/raw/master/data-visualization-2.1.pdf)
+- [RStudio ggplot2 cheat sheet (PDF)](https://github.com/rstudio/cheatsheets/raw/master/data-visualization-2.1.pdf)
+
+<script>
+  // Remove the redundant captions inserted below images. These are <p class="caption">...</p> elements created by the presence of fig.cap="..." in the chunks. We need these to provide the alt text for the images but don't need the captions as this creates duplicate/redundant text for screen readers.
+  // NOTE: the do while loop always references array index 0 because as the elements are removed from the DOM they are also removed from the array
+  var arrCaptions = document.getElementsByClassName('caption');
+  var parent;
+  
+  do {
+    parent = arrCaptions[0].parentNode;   // element containing the caption
+    parent.removeChild(arrCaptions[0]);   // remove the caption element
+  }
+  while (arrCaptions.length > 0);
+</script>
